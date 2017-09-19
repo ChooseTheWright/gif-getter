@@ -11,21 +11,33 @@ class App extends Component {
   constructor (props) {
     super (props);
     this.state = {
-      searchedGif: {},
+      searchQuery: '',
+      searchedGif: {
+        url: "https://localhost:3000"
+      },
       favoriteGifs: [],
       banishedGifs: []
     }
   }
 
-  getSearchResult = (searchQuery) => {
-    var key = config.apiKey;
-    axios.get(`http://api.giphy.com/v1/gifs/random?api_key=${key}&tag=${searchQuery}&rating=pg`)
+  getSearchQuery = (queryStr) => {
+    this.setState({searchQuery: queryStr});
+  }
+
+  getSearchResult = () => {
+    let key = config.apiKey;
+    axios.get(`http://api.giphy.com/v1/gifs/random?api_key=${key}&tag=${this.state.searchQuery}&rating=pg`)
       .then((res) => {
-        this.setState({searchedGif: res.data});
+        let searchedGif = {
+          id: res.data.data.id,
+          url: res.data.data.image_original_url
+        }
+        this.setState({searchedGif: searchedGif});
       })
       .catch((error) => {
         console.log(error);
       })
+
   }
   render() {
     return (
@@ -36,6 +48,9 @@ class App extends Component {
         </div>
         <Navbar />
         <SearchGifs getSearchResult={this.getSearchResult}
+        searchQuery={this.state.searchQuery}
+        getSearchQuery={this.getSearchQuery}
+        searchedGif={this.state.searchedGif}
         />
       </div>
     );

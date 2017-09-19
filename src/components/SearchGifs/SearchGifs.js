@@ -1,26 +1,21 @@
 import React, {Component} from 'react';
 
 class SearchGifs extends Component {
-  constructor (props) {
-    super (props);
-    this.state = {
-      searchedGif: {},
-      searchQuery: ''
-    }
-  }
-
-
-
-  getSearchQuery = (queryStr) => {
-    this.setState({searchQuery: queryStr});
-    console.log(queryStr);
-  }
 
   render () {
     return (
       <div>
-        <button onClick={() => {this.props.getSearchResult(this.state.searchQuery)}}>Seach</button>
-        <input value={this.state.searchQuery} onChange={(e) => {this.getSearchQuery(e.target.value);}}></input>
+        <div>
+          <button onClick={() => {
+            console.log(this.props.searchQuery)
+            this.props.getSearchResult()}}>Seach</button>
+          <input value={this.props.searchQuery} onChange={(e) => {this.props.getSearchQuery(e.target.value);}}></input>
+        </div>
+        <iframe width="500" height="400" scrolling="no" marginheight="0" marginwidth="0" src={this.props.searchedGif.url}></iframe>
+        <div>
+          <button>Add to Favorites</button>
+          <button>Banish</button>
+        </div>
       </div>
     )
   }
