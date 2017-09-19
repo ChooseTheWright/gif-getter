@@ -5,7 +5,7 @@ class Navbar extends Component {
   render () {
     return (
       <div className="navbar">
-        <img src="/../../../favicon.ico" />
+        <img src="/../../../favicon.ico"/>
         <div className="nav-links">
           <a href="#favoriteGifs">Favorite Gifs</a>
           <a href="#banishedGifs">Banished Gifs</a>

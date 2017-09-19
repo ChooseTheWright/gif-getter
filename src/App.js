@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import config from './config.js';
 
 import Navbar from './components/Navbar/Navbar.js';
 import SearchGifs from './components/SearchGifs/SearchGifs.js';
+import FavoriteGifs from './components/FavoriteGifs/FavoriteGifs.js';
+import BanishedGifs from './components/BanishedGifs/BanishedGifs.js';
+
+var baseUrl = config.baseUrl;
 
 class App extends Component {
   constructor (props) {
@@ -13,10 +16,11 @@ class App extends Component {
     this.state = {
       searchQuery: '',
       searchedGif: {
-        url: "https://localhost:3000"
+        url: "http://www.e-try.com/black.htm"
       },
-      favoriteGifs: [],
-      banishedGifs: []
+      searchQueryStatus: '',
+      gifAdded: true,
+      gifs: []
     }
   }
 
@@ -37,21 +41,39 @@ class App extends Component {
       .catch((error) => {
         console.log(error);
       })
-
+    this.setState({gifAdded: false});
   }
+
+  addGif = (gifStatus, added) => {
+    let inGif = {
+      id: this.state.searchedGif.id,
+      url: this.state.searchedGif.url,
+      gifStatus: gifStatus
+    };
+
+    axios.post(baseUrl, inGif)
+      .then((res) => {
+        this.setState({gifs: res.data});
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
         <Navbar />
         <SearchGifs getSearchResult={this.getSearchResult}
         searchQuery={this.state.searchQuery}
         getSearchQuery={this.getSearchQuery}
         searchedGif={this.state.searchedGif}
+        addGif={this.addGif}
+        gifAdded={this.state.gifAdded}
         />
+        <FavoriteGifs gifs={this.state.gifs}/>
+        <BanishedGifs gifs={this.state.gifs}/>
       </div>
     );
   }

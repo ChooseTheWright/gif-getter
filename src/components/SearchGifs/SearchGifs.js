@@ -6,15 +6,13 @@ class SearchGifs extends Component {
     return (
       <div>
         <div>
-          <button onClick={() => {
-            console.log(this.props.searchQuery)
-            this.props.getSearchResult()}}>Seach</button>
+          <button onClick={() => {this.props.getSearchResult()}}>Seach</button>
           <input value={this.props.searchQuery} onChange={(e) => {this.props.getSearchQuery(e.target.value);}}></input>
         </div>
-        <iframe width="500" height="400" scrolling="no" marginheight="0" marginwidth="0" src={this.props.searchedGif.url}></iframe>
+        <iframe width="500" height="500" scrolling="no" marginheight="0" marginwidth="0" src={this.props.searchedGif.url}></iframe>
         <div>
-          <button>Add to Favorites</button>
-          <button>Banish</button>
+          <button id="favorite" disabled={this.props.gifAdded} onClick={(e) => {this.props.addGif(e.target.id, true);}}>Add to Favorites</button>
+          <button id="banished" disabled={this.props.gifAdded} onClick={(e) => {this.props.addGif(e.target.id, true);}}>Banish</button>
         </div>
       </div>
     )
