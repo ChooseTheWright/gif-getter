@@ -5,10 +5,11 @@ class Navbar extends Component {
   render () {
     return (
       <div className="navbar">
-        <img src="/../../../favicon.ico"/>
+        <img src="/../../../favicon.ico" alt="React Icon" onClick={() => {this.props.deleteAllGifs()}}/>
         <div className="nav-links">
-          <a href="#favoriteGifs">Favorite Gifs</a>
-          <a href="#banishedGifs">Banished Gifs</a>
+          <a href="#search-gifs">Search Gifs</a>
+          <a href="#favorite-gifs">Favorite Gifs</a>
+          <a href="#banished-gifs">Banished Gifs</a>
         </div>
       </div>
     );

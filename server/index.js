@@ -12,6 +12,9 @@ app.use(bodyParser.json());
 const baseUrl = "/api/gifs"
 
 app.post(baseUrl, gc.addGif);
+app.get(baseUrl, gc.getAll);
+app.put(`${baseUrl}/:id/:gifStatus`, gc.updateGif);
+app.delete(baseUrl, gc.deleteAllGifs);
 
 const port = 3200;
 app.listen(port, () => {

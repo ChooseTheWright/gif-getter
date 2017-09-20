@@ -1,0 +1,27 @@
+#banished-gifs {
+  width: 100%;
+  height: 100vh;
+  background-image: url('./desert-sand-vista-background.jpg');
+  background-position: center;
+  padding-top: 30px;
+}
+
+#ban-gif-container {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.banished-gif {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+
+}
+
+.banished-gif button {
+  margin-top: 20px;
+}

@@ -1,12 +1,20 @@
 .navbar {
-  height: 80px;
+  height: 45px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #222222;
   padding: 0px 30px;
+  position: fixed;
+  top: 0px;
+  width: 96%;
 }
 
 .navbar a {
   padding-left: 20px;
+}
+
+img {
+  height: 40px;
+  width: 40px;
 }

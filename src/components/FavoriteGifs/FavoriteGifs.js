@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './FavoriteGifs.css';
 
 class FavoriteGifs extends Component {
   constructor (props) {
@@ -20,14 +21,17 @@ class FavoriteGifs extends Component {
   }
   render () {
     return (
-      <div id="favoriteGifs">
+      <div id="favorite-gifs">
         <div>
           <h2>Favorite Gifs</h2>
         </div>
-        <div>
+        <div id="fav-gif-container">
           {
             this.state.favGifs.map(val => (
-              <iframe width="500" height="500" scrolling="no" src={val.url}></iframe>
+              <div className="favorite-gif">
+              <iframe width="400" height="400" scrolling="no" src={val.url}></iframe>
+              <button id={val.id} onClick={(e) => {this.props.updateGif(e.target.id, 'favorite')}}>Banish Gif</button>
+              </div>
             ))
           }
         </div>

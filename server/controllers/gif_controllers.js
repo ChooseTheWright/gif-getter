@@ -17,6 +17,24 @@ module.exports = {
     if (controller === 0) {
       gifs.push(newGif);
     }
-    res.status(200).send(gifs);
+    res.status(200).json(gifs);
+  },
+  getAll: (req, res) => {
+    res.status(200).json(gifs);
+  },
+  updateGif: (req, res) => {
+    let {id, gifStatus} = req.params;
+    gifs.forEach((val) => {
+      if (val.id === id && gifStatus === 'favorite') {
+        return val.gifStatus = 'banished';
+      } else if (val.id === id && gifStatus === 'banished') {
+        return val.gifStatus = 'favorite';
+      }
+    });
+    res.status(200).json(gifs);
+  },
+  deleteAllGifs: (req, res) => {
+    gifs = [];
+    res.status(200).json(gifs);
   }
 }

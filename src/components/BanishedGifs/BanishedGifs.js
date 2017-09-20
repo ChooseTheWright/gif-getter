@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './BanishedGifs.css';
 
 class BanishedGifs extends Component {
   constructor (props) {
@@ -21,14 +22,17 @@ class BanishedGifs extends Component {
 
   render () {
     return (
-      <div id="banishedGifs">
+      <div id="banished-gifs">
         <div>
           <h2>Banished Gifs</h2>
         </div>
-        <div>
+        <div id="ban-gif-container">
           {
             this.state.banishedGifs.map(val => (
-              <iframe width="500" height="500" scrolling="no" src={val.url}></iframe>
+              <div className="banished-gif">
+                <iframe width="400" height="400" scrolling="no" src={val.url}></iframe>
+                <button id={val.id} onClick={(e) => {this.props.updateGif(e.target.id, 'banished')}}>Unbanish Gif</button>
+              </div>
             ))
           }
         </div>

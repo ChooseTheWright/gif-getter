@@ -1,0 +1,24 @@
+#favorite-gifs {
+  width: 100%;
+  height: 100vh;
+  background: #CECECE;
+  padding-top: 30px;
+}
+#fav-gif-container {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.favorite-gif {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.favorite-gif button {
+  margin-top: 20px;
+}

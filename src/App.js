@@ -24,6 +24,16 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    axios.get(baseUrl)
+      .then((res) => {
+        this.setState({gifs: res.data});
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
   getSearchQuery = (queryStr) => {
     this.setState({searchQuery: queryStr});
   }
@@ -59,21 +69,53 @@ class App extends Component {
       .catch((error) => {
         console.log(error);
       })
+
+    this.setState({gifAdded: added});
+  }
+
+  updateGif = (id, gifStatus) => {
+    axios.put(`${baseUrl}/${id}/${gifStatus}`)
+      .then((res) => {
+        this.setState({gifs: res.data});
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+  deleteAllGifs = () => {
+    axios.delete(baseUrl)
+      .then((res) => {
+        console.log(res.data);
+        this.setState({gifs: res.data});
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   render() {
     return (
       <div className="App">
-        <Navbar />
-        <SearchGifs getSearchResult={this.getSearchResult}
+        <Navbar
+        deleteAllGifs={this.deleteAllGifs}
+        />
+        <SearchGifs
+        getSearchResult={this.getSearchResult}
         searchQuery={this.state.searchQuery}
         getSearchQuery={this.getSearchQuery}
         searchedGif={this.state.searchedGif}
         addGif={this.addGif}
         gifAdded={this.state.gifAdded}
         />
-        <FavoriteGifs gifs={this.state.gifs}/>
-        <BanishedGifs gifs={this.state.gifs}/>
+        <FavoriteGifs
+        gifs={this.state.gifs}
+        updateGif={this.updateGif}
+        />
+        <BanishedGifs
+        gifs={this.state.gifs}
+        updateGif={this.updateGif}
+        />
       </div>
     );
   }
